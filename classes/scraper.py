@@ -44,7 +44,7 @@ class Scraper:
                 if tag:
                     author = tag.get_text(strip=True)
 
-            # --- extract content (multiple fallback strategies) ---
+            # extract content (multiple fallback strategies)
             content = None
 
             # try 1: <article> tag
