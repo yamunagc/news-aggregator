@@ -5,3 +5,4 @@ venv/
 .DS_Store
 assets/*.png
 test_scraper.py
+test_visualizer.py
