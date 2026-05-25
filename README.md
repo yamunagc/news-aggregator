@@ -398,31 +398,5 @@ The implementation has several practical limitations:
 Fallback behavior and cleaning logic are included to reduce the effect of these constraints.
 
 ---
-
-## Screenshots
-
-The final submission package includes screenshots of:
-
-- the main GUI,
-- fetched article results,
-- article detail view,
-- analytics dashboard,
-- and successful test execution.
-
----
-
-## Submission Components
-
-The complete submission package consists of:
-
-- the Python source code,
-- the `tests/` directory,
-- `requirements.txt`,
-- this README,
-- GUI screenshots,
-- the brief report,
-- and the presentation/video materials required by the assignment.
-
----
 University of Technology Sydney  
 Assignment: Information Aggregator with Web API and Scraping
