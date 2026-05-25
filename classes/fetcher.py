@@ -63,3 +63,13 @@ class NewsFetcher:
             )
             articles.append(article)
         return articles
+    
+    def fetch_all_categories(self, page_size=5):
+        all_articles = []
+        for category in self.VALID_CATEGORIES:
+            try:
+                articles = self.fetch_headlines(category, page_size)
+                all_articles.extend(articles)
+            except Exception as e:
+                print(f"Could not fetch {category}: {e}")
+        return all_articles

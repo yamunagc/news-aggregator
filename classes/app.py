@@ -84,7 +84,7 @@ class NewsApp:
         self.category_var = tk.StringVar(value="technology")
         category_menu = ttk.Combobox(
             bar, textvariable=self.category_var,
-            width=14, values=NewsFetcher.VALID_CATEGORIES,
+            width=14, values=["all"] + NewsFetcher.VALID_CATEGORIES,
             state="readonly"
         )
         category_menu.pack(side="left", padx=(0,14))
@@ -297,7 +297,10 @@ class NewsApp:
             count = int(self.count_var.get())
 
             self._set_status("Fetching from NewsAPI...")
-            api_articles = self.fetcher.fetch_headlines(category, count)
+            if category == "all":
+                api_articles = self.fetcher.fetch_all_categories(page_size=5)
+            else:
+                api_articles = self.fetcher.fetch_headlines(category, count)
 
             self._set_status("Scraping article details...")
             scraped = self.scraper.scrape_all(api_articles)
