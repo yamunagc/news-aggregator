@@ -4,7 +4,7 @@
 
 This project implements a Python-based News Information Aggregator that combines data retrieved from a public web API with additional information extracted through web scraping. The system was developed to address the assignment requirements for integrating API consumption, HTML scraping, object-oriented design, data processing, visualization, testing, and graphical user interaction.
 
-The application retrieves current news articles from NewsAPI, enriches article records by scraping source webpages, cleans and consolidates the collected data, and presents the results through a Tkinter-based interface with an analytics dashboard. The final implementation emphasizes modular architecture, tested functionality, data consistency, and usability. [file:374]
+The application retrieves current news articles from NewsAPI, enriches article records by scraping source webpages, cleans and consolidates the collected data, and presents the results through a Tkinter-based interface with an analytics dashboard. The final implementation emphasizes modular architecture, tested functionality, data consistency, and usability.
 
 ---
 
