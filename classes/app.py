@@ -7,3 +7,5 @@ class NewsApp:
 
     def run(self):
         self.root.mainloop()
+
+        # Test by monika
