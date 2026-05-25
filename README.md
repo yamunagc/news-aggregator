@@ -2,81 +2,52 @@
 
 ## Overview
 
-This project implements a Python-based News Information Aggregator that combines data retrieved from a public web API with additional information extracted through web scraping. The system was developed to address the assignment requirements for integrating API consumption, HTML scraping, object-oriented design, data processing, visualization, testing, and graphical user interaction.
+This project implements a Python-based News Information Aggregator that combines data retrieved from a public web API with additional information extracted through web scraping. The application was developed to satisfy the requirements of the assignment by integrating API consumption, HTML scraping, object-oriented design, data processing, visualization, testing, and graphical user interaction.
 
-The application retrieves current news articles from NewsAPI, enriches article records by scraping source webpages, cleans and consolidates the collected data, and presents the results through a Tkinter-based interface with an analytics dashboard. The final implementation emphasizes modular architecture, tested functionality, data consistency, and usability.
+The system retrieves current news articles from NewsAPI, enriches article records by scraping source webpages, cleans and consolidates the collected data, and presents the results through a Tkinter-based graphical interface with an analytics dashboard. The implementation emphasizes modular structure, tested functionality, data consistency, and usability.
 
 ---
 
 ## Objectives
 
-The project addresses the following functional and design objectives:
+The project addresses the following core objectives:
 
-- integration of a public news API for article retrieval, [file:374]
-- extraction of additional article details through web scraping, [file:374]
-- combination of API and scraped data into a consolidated dataset, [file:374]
-- data cleaning, duplicate removal, and consistency handling, [file:374]
-- visualization of article trends using charts, [file:374]
-- application of object-oriented programming principles, [file:374]
-- validation of critical functionality through unit testing, [file:374]
-- and provision of a user-friendly graphical interface for exploration of the aggregated data. [file:374]
-
----
-
-## Feature Summary
-
-The implemented system includes the following features:
-
-- live news retrieval using NewsAPI,
-- category-based article fetching,
-- configurable fetch count,
-- web scraping of article content, author, and publication metadata where available,
-- duplicate removal and structured data cleaning,
-- analytics generation using Matplotlib,
-- Tkinter-based article browsing and detailed article viewing,
-- local caching to reduce repeated API requests,
-- search and filtering within the GUI,
-- and unit tests for core behaviors. [file:374]
-
-In addition to the required baseline functionality, the system includes processing improvements for noisy bylines and scraped metadata, ensuring that charts such as Top Authors remain meaningful rather than reflecting webpage interface artifacts. [file:374]
+- retrieval of news articles from a public API,
+- extraction of additional article details through web scraping,
+- combination of API and scraped data into a consolidated dataset,
+- cleaning and normalization of collected data,
+- removal of duplicate records,
+- visualization of trends in the aggregated dataset,
+- application of object-oriented programming principles,
+- validation of critical functionality through unit testing,
+- and provision of a user-friendly graphical user interface.
 
 ---
 
-## System Architecture
+## Implemented Features
 
-The codebase follows an object-oriented structure in which responsibilities are separated into focused classes.
+### Core functionality
 
-### Core classes
+- Live news retrieval using NewsAPI
+- Category-based article fetching
+- Configurable number of articles to fetch
+- Web scraping of article content, author, and publication metadata where available
+- Merging of API metadata with scraped data
+- Data cleaning and duplicate removal
+- Article browsing and detail viewing through a Tkinter GUI
+- Analytics generation using Matplotlib
+- Unit testing using Python’s built-in `unittest` framework
 
-#### `NewsArticle`
-Base data model representing a generic news article with shared fields such as title, URL, source, category, and publication date.
+### Additional functionality
 
-#### `APIArticle`
-Subclass of `NewsArticle` representing article data returned from NewsAPI, with support for description, image URL, and author metadata.
-
-#### `ScrapedArticle`
-Subclass of `APIArticle` extended with scraped article content.
-
-#### `NewsFetcher`
-Responsible for interaction with NewsAPI, validation of categories, fetch count handling, and caching of recent requests.
-
-#### `Scraper`
-Responsible for retrieving article webpages, extracting useful content and metadata, and handling fallback behavior when full extraction is not possible.
-
-#### `DataProcessor`
-Responsible for merging records, removing duplicates, cleaning content, standardizing metadata, and preparing tabular data for analysis.
-
-#### `Visualizer`
-Responsible for generating article analytics charts such as source distribution, category distribution, top authors, and title keywords.
-
-#### `NewsApp`
-Responsible for graphical user interaction, event handling, article display, and integration of analytics into the Tkinter interface.
-
-This separation improves maintainability, readability, and testability while also demonstrating encapsulation, inheritance, and modular design. [file:374]
+- In-memory caching to reduce repeated API requests
+- Search/filter functionality in the GUI
+- Improved author cleaning to remove invalid byline text
+- Fallback handling for sources that restrict full content extraction
 
 ---
 
-## Technologies and Dependencies
+## Technologies Used
 
 The implementation uses the following libraries and tools:
 
@@ -91,9 +62,13 @@ The implementation uses the following libraries and tools:
 - python-dotenv
 - unittest
 
-The project dependencies are pinned to specific versions in order to preserve reproducibility across environments. Repeatable dependency installation is a standard way to reduce variation between development and evaluation environments. [web:435][file:374]
+Dependencies are pinned to specific versions in `requirements.txt` to improve reproducibility across execution environments.
 
-### `requirements.txt`
+---
+
+## Requirements
+
+The project uses the following dependency versions:
 
 ```txt
 newsapi-python==0.2.7
@@ -136,92 +111,195 @@ news-aggregator/
 
 ---
 
-## Execution
+## Architecture
 
-### Environment preparation
+The codebase follows an object-oriented design in which responsibilities are divided across dedicated classes.
 
-The application is executed from the project root using a Python virtual environment created with `venv`, which is the standard library module for isolated Python environments. Isolated environments help avoid conflicts with globally installed packages and support more predictable execution. [web:450][web:451]
+### Main classes
 
-Typical execution consists of:
-1. creating a virtual environment,
-2. activating the environment,
-3. installing dependencies from `requirements.txt`,
-4. configuring the required API key in a `.env` file,
-5. and running the application entry point. [web:450][web:455][file:374]
+#### `NewsArticle`
+Base data model representing a generic article with shared fields such as title, URL, source, category, and publication date.
 
-### Environment variable configuration
+#### `APIArticle`
+Subclass of `NewsArticle` representing article metadata obtained from NewsAPI, including description, image URL, and author fields.
 
-The application requires a valid NewsAPI key. This key is loaded from a `.env` file through `python-dotenv`, which supports configuration through environment variables rather than hardcoding secrets into source files. [web:455][web:457]
+#### `ScrapedArticle`
+Subclass of `APIArticle` extended with scraped article content.
 
-The `.env` file must contain:
+#### `NewsFetcher`
+Handles communication with NewsAPI, validation of categories, fetch count handling, and request caching.
+
+#### `Scraper`
+Retrieves source webpages, extracts relevant content and metadata, and applies fallback logic when full scraping is unavailable.
+
+#### `DataProcessor`
+Merges article records, removes duplicates, cleans fields, standardizes metadata, and prepares structured data for analysis.
+
+#### `Visualizer`
+Generates analytics charts for article sources, categories, authors, and frequent title keywords.
+
+#### `NewsApp`
+Builds the Tkinter interface, manages user interaction, displays article content, and opens the analytics dashboard.
+
+This structure improves modularity, maintainability, testability, and clarity of implementation.
+
+---
+
+## Environment Setup and Execution
+
+The application is executed from the project root using a Python virtual environment. A virtual environment is used to isolate project dependencies from the global Python installation and ensure more predictable behavior across systems.
+
+### 1. Open the project directory
+
+The application should be executed from the folder containing `main.py`, `requirements.txt`, and the `classes/` directory.
+
+Example:
+
+```cmd
+cd C:\Users\Usam\Downloads\news-aggregator
+```
+
+### 2. Confirm Python is available
+
+A Python 3 installation is required.
+
+```cmd
+python --version
+```
+
+A valid Python version should be displayed.
+
+### 3. Create a virtual environment
+
+Create an isolated environment in the project root:
+
+```cmd
+python -m venv venv
+```
+
+### 4. Activate the virtual environment
+
+On Windows Command Prompt:
+
+```cmd
+venv\Scripts\activate
+```
+
+On Windows PowerShell:
+
+```powershell
+venv\Scripts\Activate.ps1
+```
+
+After activation, the terminal typically shows a `(venv)` prefix.
+
+### 5. Install dependencies
+
+Install the required packages from `requirements.txt`:
+
+```cmd
+pip install -r requirements.txt
+```
+
+This installs all libraries required for API requests, scraping, processing, visualization, environment variable loading, and image handling.
+
+---
+
+## API Configuration
+
+The application requires a valid NewsAPI key.
+
+A `.env` file must be created in the project root directory. The file should contain the following entry:
 
 ```env
 NEWS_API_KEY=your_actual_newsapi_key_here
 ```
 
-The `.env` file should be placed in the project root directory alongside `main.py`.
+### Notes
 
-### Application launch
+- The file name must be exactly `.env`
+- The variable name must be exactly `NEWS_API_KEY`
+- The file must be located in the same root directory as `main.py`
+- The API key must be valid at runtime
 
-The application is launched through the main entry point:
+The application uses `python-dotenv` to load this configuration automatically when it starts.
+
+---
+
+## Running the Application
+
+Once the environment has been prepared and the `.env` file has been configured, the application can be launched from the project root.
 
 ```cmd
 python main.py
 ```
 
-When successfully started, the Tkinter GUI opens and provides controls for category selection, fetch count selection, article retrieval, article browsing, search/filtering, and chart display. [file:374]
+### Runtime behavior
 
-### Execution flow
+When the application starts successfully, the Tkinter GUI opens and provides the following workflow:
 
-At runtime, the application performs the following sequence:
+1. a news category is selected,
+2. the number of articles to fetch is selected,
+3. the fetch action is initiated,
+4. the application retrieves metadata from NewsAPI,
+5. additional article details are scraped from source webpages where possible,
+6. the data is cleaned and consolidated,
+7. the article list is displayed,
+8. individual article records can be inspected in detail,
+9. and analytics charts can be opened through the dashboard view.
 
-1. reads the NewsAPI key from the environment,
-2. retrieves article metadata from NewsAPI,
-3. converts API responses into structured article objects,
-4. requests source webpages for enrichment,
-5. scrapes additional content and metadata where available,
-6. cleans and consolidates the combined dataset,
-7. updates the GUI with processed article results,
-8. and generates visual analytics on demand. [file:374]
+### Interface capabilities
 
-### Typical operating sequence
+The GUI provides:
 
-Within the GUI, the expected operating sequence is:
-
-1. select a category,
-2. select the number of articles to retrieve,
-3. initiate data retrieval,
-4. review the fetched article list,
-5. inspect individual article details,
-6. and open the analytics dashboard for visualization of the processed dataset.
+- category selection,
+- fetch count selection,
+- article retrieval controls,
+- article list display,
+- source and metadata display,
+- content display,
+- search/filter functionality,
+- status messages,
+- and chart access through an analytics window.
 
 ---
 
-## Testing
+## Typical Execution Sequence
 
-The project includes unit tests implemented with Python’s built-in `unittest` framework, consistent with the assignment requirement for reliable and tested code. [file:374]
+A complete Windows execution sequence is:
 
-### Test coverage
+```cmd
+cd C:\Users\Usam\Downloads\news-aggregator
+python -m venv venv
+venv\Scripts\activate
+pip install -r requirements.txt
+python main.py
+```
 
-The current test suite covers critical behaviors including:
+If tests are to be run before application launch, the sequence becomes:
 
-- API fetch behavior and category normalization,
-- API caching behavior,
-- duplicate removal,
-- content cleaning,
-- author cleaning,
-- scrape fallback logic,
-- and extraction of valid article paragraphs.
+```cmd
+cd C:\Users\Usam\Downloads\news-aggregator
+python -m venv venv
+venv\Scripts\activate
+pip install -r requirements.txt
+python -m unittest discover -s tests -p "test_*.py" -v
+python main.py
+```
 
-### Test execution
+---
 
-All tests are executed with:
+## Running the Test Suite
+
+The project includes unit tests covering critical functionality.
+
+### Run all tests
 
 ```cmd
 python -m unittest discover -s tests -p "test_*.py" -v
 ```
 
-Individual test modules may also be executed independently:
+### Run individual test modules
 
 ```cmd
 python -m unittest tests.test_fetcher
@@ -229,138 +307,122 @@ python -m unittest tests.test_processor
 python -m unittest tests.test_scraper
 ```
 
-This testing approach provides evidence that major components behave correctly under expected and edge-case conditions. [file:374]
+### Covered behaviors
+
+The test suite validates key behaviors such as:
+
+- category normalization in the fetch layer,
+- caching behavior,
+- duplicate removal,
+- metadata cleaning,
+- invalid author filtering,
+- scrape fallback behavior,
+- and extraction of valid article content.
 
 ---
 
 ## Data Acquisition and Processing
 
-The project combines two complementary data acquisition strategies:
+The system combines two complementary data acquisition methods:
 
-- API-based retrieval for structured headline and metadata access, [file:374]
-- and scraping-based retrieval for richer article-specific content not consistently available from the API. [file:374]
+- API-based retrieval for structured article metadata,
+- and webpage scraping for additional content and metadata not reliably provided by the API.
 
-The resulting records are merged and then processed to improve data quality.
+After retrieval, records are processed through a cleaning and normalization pipeline.
 
-### Processing tasks
-
-The processing pipeline includes:
+### Processing steps
 
 - text normalization,
 - duplicate removal,
 - category standardization,
-- author cleaning,
+- author cleanup,
 - content cleanup,
-- and DataFrame generation for analysis.
+- invalid metadata suppression,
+- and conversion into a Pandas DataFrame for analysis.
 
-Special attention was given to handling malformed or noisy author fields, particularly cases where webpage interface text was incorrectly captured as an author name. Cleaning rules were introduced to suppress such noise so that analytics remain interpretable. [file:374]
-
-This processing stage is central to the quality of the final output because the usefulness of charts and article summaries depends directly on the reliability and consistency of the merged dataset. [file:374]
-
----
-
-## Visualization
-
-The analytics component uses Matplotlib to generate charts that summarize the aggregated dataset. The implemented visualizations include:
-
-- articles by source,
-- articles by category,
-- top authors,
-- and frequent title keywords. [file:374]
-
-These charts provide a compact representation of the dataset and support exploratory inspection of the retrieved news articles. Data cleaning improvements were especially important for author and keyword charts, where noisy inputs could otherwise distort interpretation. [file:374]
+Special attention was given to noisy author fields, especially cases where webpage interface text or page metadata was mistakenly captured as an author name. Cleaning logic was introduced to prevent such values from appearing in the analytics output.
 
 ---
 
-## Graphical User Interface
+## Data Visualization
 
-The application interface is implemented using Tkinter, as permitted by the assignment brief. [file:374]
+The analytics component uses Matplotlib to generate charts that summarize the dataset. Implemented visualizations include:
 
-### Main interface elements
+- Articles by Source
+- Articles by Category
+- Top Authors
+- Frequent Title Keywords
 
-The GUI provides:
-
-- category selection,
-- article count selection,
-- fetch controls,
-- search/filter functionality,
-- article list display,
-- article metadata and content display,
-- source link access,
-- status feedback,
-- and access to the analytics dashboard.
-
-The interface design prioritizes clarity, straightforward interaction, and support for real-time exploration of aggregated data, aligning with the assignment’s focus on a user-friendly and interactive tool. [file:374]
+These charts support exploratory analysis of the retrieved and processed news data.
 
 ---
 
 ## Caching
 
-An in-memory caching mechanism was implemented in the API retrieval layer to reduce redundant calls for recently requested article sets. This supports the optional feature relating to caching and helps reduce unnecessary API requests and repeated processing. [file:374]
-
-Caching improves practical efficiency during repeated use of the same category and fetch count combinations, particularly during testing and demonstration.
+An in-memory caching mechanism was implemented in the fetch layer to reduce redundant API calls for repeated requests. This improves efficiency during repeated use and addresses the optional assignment feature relating to caching.
 
 ---
 
 ## Reliability and Error Handling
 
-The codebase includes several mechanisms intended to improve robustness:
+The project includes safeguards intended to improve runtime reliability:
 
-- validation of invalid categories,
-- safe handling of missing API keys,
-- fallback messaging when scraping fails,
-- partial-content handling for restricted publishers,
-- filtering of invalid author strings,
-- and controlled GUI updates during threaded fetch operations.
+- validation of unsupported categories,
+- detection of missing API keys,
+- fallback handling for failed scraping,
+- support for partial data when websites restrict access,
+- filtering of invalid author values,
+- and controlled GUI updates during background fetching operations.
 
-These decisions were made to ensure that the application remains usable even when external services or webpage structures are inconsistent.
+These measures improve resilience when working with third-party APIs and variable webpage structures.
 
 ---
 
-## Ethical and Legal Considerations
+## Ethical Considerations
 
-The project uses publicly available API data and limited webpage scraping for educational purposes. The implementation avoids aggressive crawling behavior and uses caching to reduce unnecessary repeated requests. Where websites limit the extraction of complete content, the application falls back to partial data rather than attempting intrusive collection. Ethical and legal considerations are an important part of responsible web data use and are explicitly relevant to this assignment context. [file:374]
+The application uses publicly available API data and limited webpage scraping for educational purposes. The implementation avoids aggressive extraction behavior and uses caching to reduce unnecessary repeated requests. Where publishers restrict content access, the system falls back to partial information rather than attempting intrusive collection.
 
 ---
 
 ## Limitations
 
-The current implementation has several practical limitations:
+The implementation has several practical limitations:
 
-- some publishers restrict full article access,
-- source webpage structures vary and may affect scraping reliability,
-- author metadata is not always available or trustworthy,
-- analytics depend on the quality and diversity of runtime data,
-- and API rate or access limits may affect available results.
+- some websites restrict full article scraping,
+- full article content is not always available,
+- author metadata may be absent or inconsistent,
+- webpage structures may change over time,
+- analytics depend on the quality of runtime data,
+- and external API limits may affect article retrieval.
 
-Despite these constraints, the system includes fallback handling and cleaning logic to reduce the impact of incomplete or noisy third-party data.
-
----
-
-## Submission Components
-
-In addition to the source code, the overall submission package includes:
-
-- the Python codebase structured around OOP principles, [file:374]
-- unit tests, [file:374]
-- this README with execution and dependency documentation, [file:374]
-- GUI screenshots, [file:374]
-- a brief report discussing design decisions and challenges, [file:374]
-- and a presentation/video component as required by the assignment brief. [file:374]
+Fallback behavior and cleaning logic are included to reduce the effect of these constraints.
 
 ---
 
 ## Screenshots
 
-The final submission includes interface screenshots documenting:
+The final submission package includes screenshots of:
 
 - the main GUI,
-- article retrieval results,
-- detailed article view,
-- analytics dashboard output,
-- and successful unit test execution. [file:374]
+- fetched article results,
+- article detail view,
+- analytics dashboard,
+- and successful test execution.
 
 ---
 
+## Submission Components
+
+The complete submission package consists of:
+
+- the Python source code,
+- the `tests/` directory,
+- `requirements.txt`,
+- this README,
+- GUI screenshots,
+- the brief report,
+- and the presentation/video materials required by the assignment.
+
+---
 University of Technology Sydney  
 Assignment: Information Aggregator with Web API and Scraping
