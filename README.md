@@ -9,10 +9,8 @@ A Python desktop application that aggregates news articles from multiple online 
 ```
 news_aggregator/
 ├── main.py                  
-├── requirements.txt         
-├── .env.example             
+├── requirements.txt                 
 ├── README.md
-├── report.md                
 ├── classes/
 │   ├── __init__.py
 │   ├── article.py           
@@ -43,7 +41,7 @@ news_aggregator/
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/gcyamuna/news_aggregator.git
+git clone https://github.com/yamunagc/news-aggregator.git
 cd news-aggregator
 ```
 
@@ -87,7 +85,7 @@ python main.py
 
 1. Select a **category** from the dropdown (business, technology, sports, etc.)
 2. Select the **number of articles** to fetch (5, 10, 15, or 20)
-3. Click **Fetch News** — the app fetches, scrapes, and processes articles
+3. Click **Fetch News** - the app fetches, scrapes, and processes articles
 4. Click any article in the left panel to see its full details
 5. Use the **search box** to filter articles by title or source
 6. Click **Show Charts** to view visualisations
