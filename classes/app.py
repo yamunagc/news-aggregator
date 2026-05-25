@@ -88,17 +88,18 @@ class NewsApp:
             state="readonly"
         )
         category_menu.pack(side="left", padx=(0,14))
+        self.category_var.trace("w", self._on_category_change)
 
         tk.Label(bar, text="Articles", bg=LIGHT_BG,
                  fg=MAIN_COLOR, font=("Segoe UI", 10, "bold")).pack(side="left", padx=(0,6))
 
         self.count_var = tk.StringVar(value="10")
-        count_menu = ttk.Combobox(
+        self.count_menu = ttk.Combobox(
             bar, textvariable=self.count_var,
             width=6, values=["5", "10", "15", "20"],
             state="readonly"
         )
-        count_menu.pack(side="left", padx=(0,14))
+        self.count_menu.pack(side="left", padx=(0,14))
 
         tk.Button(
             bar, text="Fetch News",
@@ -132,7 +133,7 @@ class NewsApp:
         main = tk.Frame(self.root, bg="#eeeeee")
         main.pack(fill="both", expand=True, padx=10, pady=8)
 
-        # ── LEFT PANEL ──
+        # LEFT PANEL
         left_outer = tk.Frame(main, bg=WHITE,
                               highlightthickness=1,
                               highlightbackground=BORDER_COLOR)
@@ -169,7 +170,7 @@ class NewsApp:
         self.list_frame.bind("<Configure>", self._on_frame_configure)
         self.list_canvas.bind("<Configure>", self._on_canvas_configure)
 
-        # ── RIGHT PANEL ──
+        # RIGHT PANEL
         right_outer = tk.Frame(main, bg=WHITE,
                                highlightthickness=1,
                                highlightbackground=BORDER_COLOR)
@@ -290,6 +291,12 @@ class NewsApp:
         thread = threading.Thread(target=self._fetch_worker)
         thread.daemon = True
         thread.start()
+
+    def _on_category_change(self, *args):
+        if self.category_var.get() == "all":
+            self.count_menu.config(state="disabled")
+        else:
+            self.count_menu.config(state="readonly")
 
     def _fetch_worker(self):
         try:
