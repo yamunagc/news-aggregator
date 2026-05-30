@@ -36,7 +36,7 @@ The project addresses the following core objectives:
 - Data cleaning and duplicate removal
 - Article browsing and detail viewing through a Tkinter GUI
 - Analytics generation using Matplotlib
-- Unit testing using Python’s built-in `unittest` framework
+- Unit testing using Python's built-in `unittest` framework
 
 ### Additional functionality
 
@@ -98,17 +98,19 @@ news-aggregator/
 │
 ├── tests/
 │   ├── __init__.py
-|   ├── test_article.py
+│   ├── test_article.py
 │   ├── test_fetcher.py
 │   ├── test_processor.py
 │   └── test_scraper.py
 │
-├── charts/
+├── charts/          ← created automatically on first run
 ├── .env
 ├── main.py
 ├── requirements.txt
 └── README.md
 ```
+
+> **Note:** The `charts/` directory is not included in the repository. It is created automatically the first time the application generates visualisations.
 
 ---
 
@@ -313,6 +315,7 @@ python -m unittest tests.test_scraper
 
 The test suite validates key behaviors such as:
 
+- dataclass default values and article type identification,
 - category normalization in the fetch layer,
 - caching behavior,
 - duplicate removal,
