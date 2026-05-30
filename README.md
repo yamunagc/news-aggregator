@@ -303,6 +303,7 @@ python -m unittest discover -s tests -p "test_*.py" -v
 ### Run individual test modules
 
 ```cmd
+python -m unittest tests.test_article
 python -m unittest tests.test_fetcher
 python -m unittest tests.test_processor
 python -m unittest tests.test_scraper
