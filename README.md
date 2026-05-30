@@ -98,6 +98,7 @@ news-aggregator/
 │
 ├── tests/
 │   ├── __init__.py
+|   ├── test_article.py
 │   ├── test_fetcher.py
 │   ├── test_processor.py
 │   └── test_scraper.py
